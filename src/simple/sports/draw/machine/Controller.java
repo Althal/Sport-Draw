@@ -1,5 +1,5 @@
 
-package simple.sports.draw.machine;
+package sportdraw;
 
 import java.util.ArrayList;
 import javax.swing.UIManager;
@@ -22,16 +22,23 @@ public class Controller {
     private static ArrayList<String> toShow;
     
     /**
-     * Wyniki losowania
-     */
-    private static String[] drawedList = new String[12];
-
-    
-    /**
      * Liczba wyświetlonych drużyn
      */
     private static int showedTeams = 0;
 
+    
+    /**
+     * Liczba drużyn
+     */
+    private static final int TEAM_COUNT = 16;
+    
+    
+    /**
+     * Wyniki losowania
+     */
+    private static String[] drawedList = new String[TEAM_COUNT];
+    
+    
     
     
     
@@ -54,7 +61,7 @@ public class Controller {
         
         toDraw.add(name);
         form.teamName.setText("");
-        if(toDraw.size() == 12) {
+        if(toDraw.size() == TEAM_COUNT) {
             form.addTeam.setEnabled(false);
             form.draw.setEnabled(true);
         }
@@ -64,7 +71,7 @@ public class Controller {
     public static void draw(){
         if(showedTeams == 0) {
             toShow = new ArrayList<>();
-            for(int i=0; i<12; i++) toShow.add(toDraw.get(i));
+            for(int i=0; i<TEAM_COUNT; i++) toShow.add(toDraw.get(i));
             form.teamName.setEnabled(false);
         }
         int random = getRandomNumber();
@@ -122,9 +129,24 @@ public class Controller {
             }
             case 11: {
                 form.drawed12.setText("3: " + drawedList[showedTeams]);
-                //form.show.setEnabled(false);
                 break;
-            }            
+            }    
+            case 12: {
+                form.drawed13.setText("4: " + drawedList[showedTeams]);
+                break;
+            }
+            case 13: {
+                form.drawed14.setText("4: " + drawedList[showedTeams]);
+                break;
+            }
+            case 14: {
+                form.drawed15.setText("4: " + drawedList[showedTeams]);
+                break;
+            }
+            case 15: {
+                form.drawed16.setText("4: " + drawedList[showedTeams]);
+                break;
+            }   
         }        
         showedTeams++;
     }
@@ -137,6 +159,10 @@ public class Controller {
     
     private static void setList(){
         switch(toDraw.size()){
+            case 16: form.team16.setText("16: " + toDraw.get(15));
+            case 15: form.team15.setText("15: " + toDraw.get(14));
+            case 14: form.team14.setText("14: " + toDraw.get(13));
+            case 13: form.team13.setText("13: " + toDraw.get(12));
             case 12: form.team12.setText("12: " + toDraw.get(11));
             case 11: form.team11.setText("11: " + toDraw.get(10));
             case 10: form.team10.setText("10: " + toDraw.get(9));
@@ -153,15 +179,15 @@ public class Controller {
     }
     
     private static int getRandomNumber(){
-        if(showedTeams == 12) return 0;
+        if(showedTeams == TEAM_COUNT) return 0;
         long random = System.currentTimeMillis();
-        return (int)(random % (12 - showedTeams));
+        return (int)(random % (TEAM_COUNT - showedTeams));
     }
     
     public static void reset(){
         toDraw = new ArrayList<>();
         toShow = null;
-        drawedList = new String[12];
+        drawedList = new String[TEAM_COUNT];
         showedTeams = 0;
         form.addTeam.setEnabled(true);
         form.draw.setEnabled(false);
@@ -178,6 +204,10 @@ public class Controller {
         form.drawed10.setText("3: " );
         form.drawed11.setText("3: " );
         form.drawed12.setText("3: " );
+        form.drawed13.setText("4: " );
+        form.drawed14.setText("4: " );
+        form.drawed15.setText("4: " );
+        form.drawed16.setText("4: " );
         
         form.team1.setText("1: " );
         form.team2.setText("2: " );
@@ -191,6 +221,10 @@ public class Controller {
         form.team10.setText("10: " );
         form.team11.setText("11: " );
         form.team12.setText("12: " );
+        form.team13.setText("13: " );
+        form.team14.setText("14: " );
+        form.team15.setText("15: " );
+        form.team16.setText("16: " );
         
         form.addTeam.setEnabled(true);
         form.teamName.setEnabled(true);
